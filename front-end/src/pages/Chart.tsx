@@ -6,18 +6,9 @@ import { Link } from "react-router-dom";
 
 const DemoPie = () => {
   const dataStore = useDataStore();
-  //   const genderCount = dataStore.data.reduce(
-  //     (acc, { gender }) => {
-  //       if (gender === "male") {
-  //         acc.male += 1;
-  //       } else if (gender === "female") {
-  //         acc.female += 1;
-  //       }
-  //       return acc;
-  //     },
-  //     { male: 0, female: 0 }
-  //   );
+  
   const cityCount = {};
+  const totalCount = dataStore.data.length;
 
   dataStore.data.forEach((item) => {
     const city = item.address.city;
@@ -30,7 +21,7 @@ const DemoPie = () => {
 
   const cityCounts = Object.entries(cityCount).map(([name, count]) => ({
     type: name,
-    value: count,
+    value: parseFloat((count / totalCount * 100).toFixed(2)),
   }));
   const data = cityCounts;
 
